@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year My Love ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="music/love.mp3" type="audio/mp3">
+</audio>
+
+<div id="hearts"></div>
+
+<section class="page active">
+  <div class="letter">
+    <h1 id="type1"></h1>
+    <button onclick="nextPage()">Open My Heart 💌</button>
+  </div>
+</section>
+
+<section class="page">
+  <div class="letter">
+    <h2>Our Memories 📸</h2>
+    <img src="photos/pic1.jpg" class="photo">
+    <p>You make every moment magical ❤️</p>
+    <button onclick="nextPage()">Next 💕</button>
+  </div>
+</section>
+
+<section class="page">
+  <div class="letter">
+    <h2>A Special Memory 🎥</h2>
+    <video controls>
+      <source src="videos/memory.mp4" type="video/mp4">
+    </video>
+    <button onclick="nextPage()">Final Message 💖</button>
+  </div>
+</section>
+
+<section class="page">
+  <div class="letter">
+    <h1 id="type2"></h1>
+    <p class="signature">Forever Yours ❤️</p>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: #fff5f7;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.page.active {
+  display: flex;
+}
+
+.letter {
+  background: #fff;
+  width: 90%;
+  max-width: 400px;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+button {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.photo {
+  width: 100%;
+  border-radius: 15px;
+  margin: 15px 0;
+}
+
+video {
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* Hearts */
+#hearts span {
+  position: absolute;
+  bottom: -10px;
+  color: #ff4d6d;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+
+.signature {
+  margin-top: 20px;
+  font-style: italic;
+}
+let currentPage = 0;
+const pages = document.querySelectorAll(".page");
+
+function nextPage() {
+  pages[currentPage].classList.remove("active");
+  currentPage++;
+  pages[currentPage].classList.add("active");
+}
+
+// Typing animation
+function typeText(element, text, speed) {
+  let i = 0;
+  const interval = setInterval(() => {
+    element.innerHTML += text.charAt(i);
+    i++;
+    if (i === text.length) clearInterval(interval);
+  }, speed);
+}
+
+typeText(
+  document.getElementById("type1"),
+  "Hey My Love ❤️\nI wrote this letter just for you...",
+  70
+);
+
+typeText(
+  document.getElementById("type2"),
+  "Happy New Year 2026 🎆\nMay every year begin and end with you by my side.\nI Love You ❤️",
+  70
+);
+
+// Heart animation
+setInterval(() => {
+  const heart = document.createElement("span");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.getElementById("hearts").appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
